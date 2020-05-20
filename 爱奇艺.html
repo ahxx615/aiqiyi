@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>爱奇艺-在线视频网站-海量正版高清视频在线观看</title>
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<link rel="stylesheet" type="text/css" href="css.css">
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div>
+		<!-- 头部 -->
+		<div class="head">
+			<div>
+				<div class="logo"><a href=""><img :src="src" @mouseenter="hover" @mouseleave="leave"></a></div>
+				<div class="query">
+					<span class="query-left" >
+						<input type="text" placeholder="奔跑吧兄弟" @focus="chaxun" @blur="chaxun">
+						<a href="">
+							<i></i>
+							<em>热搜榜</em>
+						</a>
+						<div :class="{rs:mark,rs1:!mark}">
+							<ul>
+								<p>热门搜索</p>
+								<li v-for="(val,i) in rs"><i>{{i+1}}</i><a href="">{{val}}</a></li>
+							</ul>
+						</div>
+					</span>
+					<span class="query-right">
+						<i></i>
+						<em>搜全网</em>
+					</span>
+				</div>
+				<div class="my">
+					<ul>
+						<li class="vip">
+							<a href="">
+								<i class="tub"></i>
+								<h3>VIP</h3>
+								<i class="sjx"></i>
+							</a>
+							<div class="tc">
+								<ul>
+									<li class="tc-1">
+										<a href="">
+											<i></i>
+											<p>了解VIP会员特权</p>
+										</a>
+									</li>
+									<li class="tc-2">
+										<a href="">
+											<i></i>
+											<p>领取VIP会员福利</p>
+										</a>
+									</li>
+									<li class="tc-3">
+										<a href="">
+											<i></i>
+											<p>做任务，领奖励</p>
+										</a>
+									</li>
+								</ul>
+								<a>登录</a>
+							</div>
+						</li>
+						<li class="sc">
+							<a href="">
+								<i class="tub"></i>
+								<h3>上传</h3>
+								<i class="sjx"></i>
+							</a>
+							<div class="tc">
+								<ul>
+									<li class="tc-1">
+										<a href="">
+											<i></i>
+											<p>发布作品</p>
+										</a>
+									</li>
+									<li class="tc-2">
+										<a href="">
+											<i></i>
+											<p>作品管理</p>
+										</a>
+									</li>
+									<li class="tc-3">
+										<a href="">
+											<i></i>
+											<p>爱奇艺号</p>
+										</a>
+									</li>
+									<li class="tc-4">
+										<a href="">
+											<i></i>
+											<p>我的空间</p>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="khd">
+							<a href="">
+								<i class="tub"></i>
+								<h3>客户端</h3>
+								<i class="sjx"></i>
+							</a>
+							<div class="tc">
+								<ul>
+									<li class="tc-1">
+										<a href="">
+											<i></i>
+											<p>新用户广告特权</p>
+										</a>
+									</li>
+									<li class="tc-2">
+										<a href="">
+											<i></i>
+											<p>极速流畅播放</p>
+										</a>
+									</li>
+									<li class="tc-3">
+										<a href="">
+											<i></i>
+											<p>畅享4K视频</p>
+										</a>
+									</li>
+								</ul>
+								<a>立即体验</a>
+							</div>
+						</li>
+						<li class="xx">
+							<a href="">
+								<i class="tub"></i>
+								<h3>消息</h3>
+								<i class="sjx"></i>
+							</a>
+							<div class="tc2">
+								<div class="tab">
+									<a href=""  class="on">更新提示<i></i></a>
+									<a href="">与我相关<i></i></a>
+									<a href="">系统通知<i></i></a>
+								</div>
+								<div class="content">
+									<i></i>
+									<p>追剧更新立即通知，从不错过</p>
+									<a href="">登录</a>
+								</div>
+							</div>
+						</li>
+						<li class="kg">
+							<a href="">
+								<i class="tub"></i>
+								<h3>看过</h3>
+								<i class="sjx"></i>
+							</a>
+							<div class="tc2">
+								<div class="tab">
+									<span>
+										<i></i>
+									</span>
+									<h3>过滤短视频</h3>
+								</div>
+								<div class="content">
+									<i></i>
+									<p>您还没有观看任何长视频哦</p>
+									<a href="">登录</a>
+								</div>
+							</div>
+						</li>
+						<li class="dl">
+							<a href="">
+								<i class="tub"></i>
+								<h3>登录</h3>
+								<i class="sjx"></i>
+							</a>
+							<div class="tc2">
+								<div class="tab">
+									<img src="picture/header-userImg-default-green.png">
+									<span>
+										<a href="">登录</a>
+										<span>/</span>
+										<a href="">注册</a>
+										<span>后，你可以：</span>
+									</span>
+									<a class="dlbt">登录</a>
+								</div>
+								<div class="content">
+									<ul>
+										<li v-for="val in dl">
+											<i></i>
+											<span>
+												<a>{{val.title}}</a>
+												<p>{{val.remark}}</p>
+											</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- 导航区 -->
+		<div class="nav">
+			<div>
+				<div class="picture">
+					<img v-for="(val,i) in imgs" :src="val.src" v-show="i==mark" @mouseenter="stop" @mouseleave="autoplay">
+				</div>
+				<div class="title">
+					<ul>
+						<li v-for="(name,index) in imgs" :class="{on1:index==mark}" @mouseenter="stop();change(index)">
+							<a href="">
+								<span :class="{on2:index==mark}">{{name.title}}</span>
+								<span :class="{on3:index==mark}">：</span>
+								<span :class="{on4:index==mark}">{{name.content}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="menu">
+					<div>
+						<div class="menu-1">
+							<div v-for="(val,i) in menu1" class="menu-items">
+								<div><a href="">{{val.top}}</a></div>
+								<div><a href="">{{val.bottom}}</a></div>
+							</div>							
+						</div>
+						<div class="menu-2">
+							<div v-for="(val,i) in menu2" class="menu-items">
+								<div><a href="">{{val.top}}</a></div>
+								<div><a href="">{{val.bottom}}</a></div>
+							</div>							
+						</div>
+						<div class="menu-3">
+							<div v-for="(val,i) in menu3" class="menu-items">
+								<div><a href="">{{val.top}}</a></div>
+								<div><a href="">{{val.bottom}}</a></div>
+							</div>							
+						</div>
+						<div class="menu-4">
+							<div v-for="(val,i) in menu4" class="menu-items">
+								<div><a href="">{{val.top}}</a></div>
+								<div><a href="">{{val.bottom}}</a></div>
+							</div>							
+						</div>
+						<a href="" class="hyjx">
+							<i></i>
+							<em>会员精选</em>
+						</a>											
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 主内容区 -->
+		<div class="main">
+			<div>
+				<div class="jrjd items">
+					<div class="top clearfix">
+						<div class="top-left">
+							<i class="tubiao"></i>
+							<h1 class="dbt">今日焦点</h1>
+							<a href="" class="more">更多焦点></a>
+						</div>
+						<div class="turnpage">
+							<span>
+								<i @click="previousPage"></i>
+								<span class="on">{{jrjdPage}}</span>/3
+								<i @click="nextPage"></i>
+							</span>
+						</div>
+					</div>
+					<div class="vedio-list">
+						<div class="wrap" :style="{left:jrjdLeft+'px'}">							
+							<ul>
+								<li v-for="(val,i) in jrjd">
+									<a href="">
+										<span class="rongqi">											
+											<img class="haibao" :src="val.src">
+										</span>
+										<i class="tips">{{val.tip}}</i>
+										<p class="biaoti">{{val.title}}</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="cnzz items">
+					<div class="top-left top">
+						<i class="tubiao"></i>
+						<a class="dbt" href="">猜你在追</a>
+						<span>
+							<a href="">我的订阅</a>
+							<span class="separator">/</span>
+							<a href="">我的收藏</a>
+						</span>
+					</div>
+					<div class="clearfix">
+						<div class="bottom-dl">
+							<p>同步多设备播放记录</p>
+							<p>便捷续看</p>
+							<p>精准推荐</p>
+							<a href="">登录</a>
+						</div>
+						<div class="vedio-list">
+							<ul>
+								<li v-for="(val,i) in cnzz">
+									<a href="">
+										<span class="rongqi">
+											<img class="haibao" :src="val.src">
+										</span>
+										<i class="tips">{{val.tip}}</i>
+										<p class="biaoti">{{val.title}}</p>
+									</a>
+									<p class="remark">{{val.remark}}</p>									
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="zy items">
+					<div class="top">
+						<div class="top-left">
+							<i class="tubiao"></i>
+							<a class="dbt"  href="">综艺</a>
+							<a class="more" href="">更多></a>
+							<ul>
+								<li class="tuijian" v-for="(val,i) in zygd"><a href="">{{val}}</a><span class="separator">/</span></li>
+							</ul>
+						</div>
+						<div class="top-right">
+							<h1>精彩推荐</h1>
+							<a href="">更多></a>
+						</div>						
+					</div>
+					<div>
+						<div class="zytt">
+							<div class="wrap" :style="{left:zyttLeft+'px'}" @mouseenter="stop" @mouseleave="autoplay">
+								<ul>
+									<li v-for="val in zytt">
+										<a href="">								
+											<img :src="val.src">
+											<i></i>
+											<i>{{val.tip}}</i>
+											<p class="biaoti">{{val.biaoti}}</p>
+										</a>
+										
+										<p class="remark">{{val.remark}}</p>							
+									</li>
+								</ul>
+							</div>
+							<i class="leftbtn" @click="previousPage2"></i>
+							<i class="rightbtn" @click="nextPage2"></i>
+						</div>
+						<div class="vedio-list">
+							<ul>
+								<li v-for="(val,i) in zy">
+									<a href="">
+										<span class="rongqi">
+											<img class="haibao" :src="val.src">
+										</span>
+										<i class="label"></i>
+										<i class="tips">{{val.tip}}</i>
+										<p class="biaoti">{{val.title}}</p>
+									</a>
+									<p class="remark">{{val.remark}}</p>									
+								</li>
+							</ul>
+						</div>
+						<div class="zy-bottom-right">
+							<div>
+								<a href="">
+									<img src="picture/08c014ff28b646de81cb71c954832334.jpeg">
+									<p>奔跑吧官宣“砂锅菜”</p>									
+								</a>
+							</div>
+							<ul>
+								<li v-for="(val,i) in zyph">
+									<a href=""><i></i>{{val}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="dy items">
+					<div class="top">
+						<div class="top-left">
+							<i class="tubiao"></i>
+							<a class="dbt"  href="">电影</a>
+							<a class="more" href="">更多></a>
+							<ul>
+								<li class="tuijian" v-for="(val,i) in dygd"><a href="">{{val}}</a><span class="separator">/</span></li>
+							</ul>
+						</div>
+						<div class="top-right">
+							<h1>电影榜</h1>
+							<a href="">更多></a>
+						</div>						
+					</div>					
+					<div>
+						<div class="vedio-list clearfix">
+							<ul>
+								<li v-for="(val,i) in dy1">
+									<a href="">
+										<span class="rongqi">
+											<img class="haibao" :src="val.src">
+										</span>
+										<img class="tubiao" :src="val.lab">
+										<p class="biaoti">{{val.title}}</p>
+										<em>{{val.score}}</em>
+									</a>
+									<p class="remark">{{val.remark}}</p>
+								</li>
+							</ul>
+						</div>
+						<div class="dyphb clearfix">
+							<ul>
+								<li v-for="(val,i) in dy3"><i>{{i+1}}</i><a href="">{{val}}</a></li>
+							</ul>
+						</div>
+						<div class="vedio-list clearfix">
+							<ul>
+								<li v-for="(val,i) in dy2">
+									<a href="">
+										<span class="rongqi">
+											<img class="haibao" :src="val.src">
+										</span>
+										<img class="tubiao" :src="val.lab">
+										<p class="biaoti">{{val.title}}</p>
+										<em>{{val.score}}</em>
+									</a>
+									<p class="remark">{{val.remark}}</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="dsj items">
+					<div class="top">
+						<div class="top-left">
+							<i class="tubiao"></i>
+							<a class="dbt"  href="">电视剧</a>
+							<a class="more" href="">更多></a>
+							<ul>
+								<li class="tuijian" v-for="(val,i) in dsjgd"><a href="">{{val}}</a><span class="separator">/</span></li>
+							</ul>
+						</div>
+						<div class="top-right">
+							<h1>电视剧榜</h1>
+							<a href="">更多></a>
+						</div>						
+					</div>					
+					<div>
+						<div class="vedio-list clearfix">
+							<ul>
+								<li v-for="(val,i) in dsj1">
+									<a href="">
+										<span class="rongqi">
+											<img class="haibao" :src="val.src">	
+										</span>
+										<img class="tubiao" :src="val.lab">
+										<p class="biaoti">{{val.title}}</p>
+										<em>{{val.score}}</em>
+									</a>
+									<p class="remark">{{val.remark}}</p>
+								</li>
+							</ul>
+						</div>
+						<div class="dsjphb clearfix">
+							<ul>
+								<li v-for="(val,i) in dsj3"><i>{{i+1}}</i><a href="">{{val}}</a></li>
+							</ul>
+						</div>
+						<div class="vedio-list clearfix">
+							<ul>
+								<li v-for="(val,i) in dsj2">
+									<a href="">
+										<span class="rongqi">
+											<img class="haibao" :src="val.src">
+										</span>
+										<img class="tubiao" :src="val.lab">
+										<p class="biaoti">{{val.title}}</p>
+										<em>{{val.score}}</em>
+									</a>
+									<p class="remark">{{val.remark}}</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>			
+				<div class="related-webs items">
+					<ul>
+						<li v-for="(val,i) in relatedwebs">
+							<a href="">
+								<i :style="val.b"></i>
+								<p>{{val.title}}<i></i></p>
+							</a>
+						</li>
+					</ul>
+				</div>	
+			</div>
+		</div>
+		<!-- 尾部 -->
+		<div class="foot">
+			<div>
+				<div class="extension">
+					<ul>
+						<h1>关于我们</h1>
+						<li v-for="(val,i) in gywm">
+							<a href="">{{val}}</a>
+						</li>
+					</ul>
+					<ul>
+						<h1>About Us</h1>
+						<li v-for="(val,i) in ab">
+							<a href="">{{val}}</a>
+						</li>
+					</ul>
+					<ul>
+						<h1>内容合作</h1>
+						<li v-for="(val,i) in nrhz">
+							<a href="">{{val}}</a>
+						</li>
+					</ul>
+					<ul>
+						<h1>技术合作</h1>
+						<li v-for="(val,i) in jshz">
+							<a href="">{{val}}</a>
+						</li>
+					</ul>
+					<ul>
+						<h1>招聘英才</h1>
+						<li v-for="(val,i) in zpyc">
+							<a href="">{{val}}</a>
+						</li>
+					</ul>
+					<ul>
+						<h1>常见问题</h1>
+						<li v-for="(val,i) in cjwt">
+							<a href="">{{val}}</a>
+						</li>
+					</ul>
+				</div>
+				<div class="law">
+					<div>
+						<ul>
+							<li v-for="(val,i) in law1">
+								<a href=""><img :src="val.src">{{val.title}}</a>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<ul>
+							<li v-for="(val,i) in law2">
+								<a href="">{{val}}</a>
+							</li>
+						</ul>
+					</div>
+				</div>	
+				<div class="report">
+					<ul>
+						<li v-for="(val,i) in jb">
+							<a href="">{{val}}</a>
+						</li>
+					</ul>
+				</div>
+				<div class="copyright">Copyright © 2020 爱奇艺 All Rights Reserved</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		// 头部
+		new Vue({
+			el:'.head',
+			data:{
+				mark:0,
+				src:'picture/logo.png',
+				my:['VIP','上传','客户端','消息','看过','登录'],
+				rs:['青春有你','奔跑吧兄弟','王牌对王牌','奥特曼','极限挑战','海贼王','木鱼','我的世界','小猪佩奇','熊出没',],
+				dl:[
+					{title:'多端记录同步',remark:'各端尽情看，记录永相随'},
+					{title:'积分兑换礼品',remark:'只要积分够，好礼随便送'},
+					{title:'弹幕 · 评论',remark:'分享你的想法'},
+					{title:'精彩剧情及时追',remark:'追看你的喜爱'},
+				],
+			},
+			methods:{
+				hover(){
+					this.src=this.src.slice(0,-4)+"-hover.png";
+				},
+				leave(){
+					this.src=this.src.slice(0,-10)+".png";
+				},
+				chaxun(){
+					this.mark=!this.mark;
+				},
+			},
+
+		})
+		// 导航区
+		new Vue({
+			el:'.nav',
+			data:{
+				mark:0,
+				time:null,
+				menu1:[
+					{top:'娱乐',bottom:'资讯'},
+					{top:'电影',bottom:'网络电影'},
+					{top:'电视剧',bottom:'片花'},
+					{top:'综艺',bottom:'脱口秀'}
+				],
+				menu2:[
+					{top:'动漫',bottom:'游戏'},
+					{top:'搞笑',bottom:'旅游'},
+					{top:'音乐',bottom:'时尚'},
+					{top:'原创',bottom:'体育'}
+				],
+				menu3:[
+					{top:'财经',bottom:'科技'},
+					{top:'知识',bottom:'教育'},
+					{top:'儿童',bottom:'母婴'},
+					{top:'生活',bottom:'健康'},
+					{top:'军事',bottom:'汽车'},
+					{top:'公益',bottom:'纪录片'},
+					{top:'文学',bottom:'漫画'}
+				],
+				menu4:[
+					{top:'热点',bottom:'风云榜'},
+					{top:'全网影视',bottom:'应用商店'},
+					{top:'奇秀直播',bottom:'直播中心'},
+					{top:'商城',bottom:'VR'},
+					{top:'大头',bottom:'爱奇艺号'},
+					{top:'泡泡广场',bottom:'游戏中心'}
+				],
+				imgs:[
+					{title:'青你',content:'《非日常狂欢》活力来袭',src:'picture/nav-1.webp'},
+					{title:'古董',content:'许愿battle百瑞莲',src:'picture/nav-2.webp'},
+					{title:'极挑6',content:'雷佳音郭京飞相爱相杀',src:'picture/nav-3.webp'},
+					{title:'青你2',content:'第3次排名前九大换血',src:'picture/nav-4.webp'},
+					{title:'触手可及',content:'24点热巴甜梦来袭',src:'picture/nav-5.webp'},
+					{title:'长相守',content:'于小彤毛晓慧乱世虐恋',src:'picture/nav-6.webp'},
+					{title:'报告王爷',content:'七管炎夫妇过度宠溺',src:'picture/nav-7.webp'},
+					{title:'秋蝉',content:'夜莺cp解开心结',src:'picture/nav-8.webp'},
+					{title:'520佳作',content:'婚姻故事即将上映',src:'picture/nav-9.png'},
+					{title:'暗黑大天使',content:'六年经历一生回忆',src:'picture/nav-10.webp'},
+				],
+			},
+			methods:{
+				next(){
+					this.mark+=1;
+					if(this.mark==10){
+						this.mark=0;
+					}
+				},
+				autoplay(){
+					this.time=setInterval(this.next,2000);
+				},
+				stop(){
+					clearInterval(this.time);
+				},
+				change(i){
+					this.mark=i;
+				}
+			},
+			created(){
+				this.autoplay();
+			}
+		})
+		//内容区
+		new Vue({
+			el:'.main',
+			data:{
+				mark:1,
+				jrjdLeft:0,
+				jrjdPage:1,
+				zyttLeft:0,
+				time:null,
+				jrjd:[
+					{title:'全球新冠肺炎累计确诊超409万例',src:'picture/jrjd-1.webp',tip:'05-11期'},
+					{title:'丰巢高管回应快递柜超时收费：不收费就只能退出市场',src:'picture/jrjd-2.webp',tip:'05-11期'},
+					{title:'英国首相发表演讲 计划开始复工复产',src:'picture/jrjd-3.webp',tip:'05-11期'},
+					{title:'吉林省10日新增本地确诊病例3例，均为舒兰市',src:'picture/jrjd-4.webp',tip:'05-11期'},
+					{title:'青春有你2：曾可妮陆柯燃“气场一米八”',src:'picture/jrjd-5.webp',tip:''},
+					{title:'极限挑战6：岳云鹏不认识谢霆锋？',src:'picture/jrjd-6.webp',tip:'03:20'},
+					{title:'唱作人2·幕后故事：张艺兴揭秘《十面埋伏》',src:'picture/jrjd-7.webp',tip:''},
+					{title:'每周少女时间：段艺璇一秒剥虾最强教学',src:'picture/jrjd-8.webp',tip:'04:08'},
+					{title:'黑龙江吉林与湖北病例有何不同？专家给出四点区别',src:'picture/jrjd-9.webp',tip:'05-21期'},
+					{title:'吉林新增1例本地确诊：系控制范围内主动筛查',src:'picture/jrjd-10.webp',tip:'05-15期'},
+					{title:'女子谎称新冠感染带11岁女儿一起自杀',src:'picture/jrjd-11.webp',tip:'05-14期'},
+					{title:'来“吃瓜”呀！瓜农种心形西瓜520时赠爱妻',src:'picture/jrjd-12.webp',tip:''},
+					{title:'神剧亮了特别策划：爱奇艺最受期待的五部神剧！',src:'picture/jrjd-13.webp',tip:'05-18期'},
+					{title:'宋昕冉弹琴被血虐 楚楚可怜',src:'picture/jrjd-14.webp',tip:'02:17'},
+					{title:'耐撕大片：互动·源代码之你能通关吗',src:'picture/jrjd-15.webp',tip:''},
+					{title:'青春有你2·幕后：林凡致信陆柯燃刘令姿落泪',src:'picture/jrjd-16.webp',tip:'03:01'},
+					{title:'喜欢你我也是：李汶翰预测小熊要“失宠”',src:'picture/jrjd-17.webp',tip:'05-12期'},
+					{title:'极限挑战6：张艺兴夸岳云鹏可爱又有才',src:'picture/jrjd-18.webp',tip:'05-18期'},
+					{title:'刘雨昕孔雪儿分享快乐瞬间 安崎安排长卷发造型',src:'picture/jrjd-19.webp',tip:'05-12期'},
+					{title:'《青你2》变美小技巧：刘雨昕小课堂 粉底是好东西',src:'picture/jrjd-20.webp',tip:''},
+					{title:'国际博物馆日带你探索宝藏们的“前世今生”',src:'picture/jrjd-21.webp',tip:'05-11期'},
+					{title:'我是唱作人2：入坑了！张艺兴欲养一只猫',src:'picture/jrjd-22.webp',tip:''},
+					{title:'每周少女时间：张钰疯狂高呼放弃 许杨玉琢自称“废物”',src:'picture/jrjd-23.webp',tip:'02:10'},
+					{title:'我的“戏精”女孩之许佳琪：拆字版传神演绎',src:'picture/jrjd-24.webp',tip:'03:09'},
+				],
+				cnzz:[
+					{title:'鬓边不是海棠红',src:'picture/cnzz-1.webp',tip:'49集全',remark:'观看至第2集'},
+					{title:'520特辑：献给梅西球王与王后的一首情歌',src:'picture/cnzz-2.webp',tip:'更新至05-12期',remark:'观看至05-12期'},
+					{title:'五分钟腹肌训练 居家必备的健身方式',src:'picture/cnzz-3.webp',tip:'00:12',remark:'为你推荐'},
+					{title:'解忧理发店',src:'picture/cnzz-4.webp',tip:'01:00',remark:'为你推荐'},
+					{title:'千年古琴 岁月轮回',src:'picture/cnzz-5.webp',tip:'00:38',remark:'为你推荐'},
+					{title:'青春有你第2季',src:'picture/cnzz-6.webp',tip:'更新至1集',remark:'近期热播内容'},
+					{title:'极限挑战第6季',src:'picture/cnzz-7.webp',tip:'更新至1集',remark:'近期热播内容'},
+				],
+				zygd:['王牌对王牌5','歌手·当打之年','欢乐喜剧人6','天赐的声音','经典咏流传第3季'],
+				zytt:[
+					{src:'picture/58a793816ae4424d90487093f0511702.webp',tip:'05-20期',biaoti:'喜欢你我也是2',remark:'李汶翰直言男生打球是给女生看的 李川枫附体笑翻全场'},
+					{src:'picture/49ca9f10046846019b5fa131b9e1c84a.webp',tip:'05-10期',biaoti:'我要这样生活·名场面',remark:'范丞丞小鬼甩嘴舞爆笑众人'},				
+					{src:'picture/4fb3a016bb9946f5b9a00bd6901f22d2.webp',tip:'05-21期',biaoti:'青春加点戏',remark:'玉佩失踪引发解密大战 夏研忘剧本绕晕众人'},
+				],
+				zy:[
+					{title:'笑起来真好看',src:'picture/zy-1.webp',tip:'05-08期',remark:'李汉文自黑归来仍是素人'},
+					{title:'王牌对王牌5',src:'picture/zy-2.webp',tip:'05-08期',remark:'关晓彤比划缺字看傻华晨宇'},
+					{title:'天赐的声音',src:'picture/zy-3.webp',tip:'05-09期',remark:'张雨涵绝美眼色撩人'},
+					{title:'亲爱的来吃饭',src:'picture/zy-4.webp',tip:'05-09期',remark:'外国网红重庆话惊呆贾乃亮'},
+					{title:'歌手·总决赛',src:'picture/zy-5.webp',tip:'04-24期',remark:'捷克俊逸核能炸场'},
+					{title:'向往的生活',src:'picture/zy-6.jpg',tip:'05-10期',remark:'开关游戏逼疯白痴程文婷'},
+					{title:'坑王驾到第4季',src:'picture/zy-7.webp',tip:'05-09期',remark:'郭德纲详解芝麻酱的做法'},
+					{title:'路见不平来碗Fun',src:'picture/zy-8.webp',tip:'05-08期',remark:'烤全羊的两种神仙吃法'},
+					{title:'金牌调解',src:'picture/zy-9.webp',tip:'05-09期',remark:'丈夫对妻子隐瞒坐牢经历'},
+					{title:'奔跑吧兄弟第3季',src:'picture/zy-10.webp',tip:'12-11期',remark:'ella陈赫演技爆表骗李晨'},
+				],
+				zyph:['彭昱畅回应恋情：点个赞','我是唱作人2完整歌单','简恺乐自曝喜欢罗志祥','《中国新说唱2020》海选','王凯综艺名场面盘点',],
+				dygd:['爱奇艺爱电影','爱奇艺文艺院线','爱奇艺独播专区','爱奇艺网络电影','系列电影尽享刷','甄子丹在线影展','不可不看的环球经典电影',],
+				dy1:[
+					{title:'我们永不言弃',src:'picture/dy-1.webp',lab:'picture/only.png',remark:'韩庚拳坛拼死一搏',score:'8.2'},
+					{title:'无名战士',src:'picture/dy-2.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'苏芬战火一触即发',score:'7.3'},
+					{title:'扶桑有狐',src:'picture/dy-3.webp',lab:'picture/only.png',remark:'三美狐情迷太阳神',score:'7.2'},
+					{title:'别告诉她',src:'picture/dy-4.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'寻根家庭喜剧',score:'8.2'},
+					{title:'灭绝',src:'picture/dy-5.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'异星入侵引爆末日惊魂',score:'8.4'},
+					{title:'大腕',src:'picture/dy-6.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'冯式经典黑色幽默',score:'8.2'},
+					{title:'无双花木兰',src:'picture/dy-7.webp',lab:'picture/only.png',remark:'木兰从军代父出征',score:'7.1'},
+				],
+				dy2:[
+					{title:'狐踪谍影',src:'picture/dy-8.webp',lab:'picture/only.png',remark:'曾志伟摇变泰国警督',score:'7.8'},
+					{title:'双鱼陨石',src:'picture/dy-9.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'罗布泊灵异玉佩事件',score:'7.9'},
+					{title:'爆炸新闻',src:'picture/dy-10.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'美国性丑闻案改编',score:'7.5'},
+					{title:'龙潭巨兽',src:'picture/dy-11.webp',lab:'picture/only.png',remark:'神兽现身引巨变',score:'6.4'},
+					{title:'利刃出鞘',src:'picture/dy-12.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'007&美队双雄争霸',score:'7.9'},
+					{title:'小羊肖恩2：末日农场',src:'picture/dy-13.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'小羊肖恩欢乐太空冒险',score:'7.5'},
+					{title:'救火奶爸',src:'picture/dy-14.webp',lab:'picture/only.png',remark:'肌肉男带萌娃',score:'6.9'},
+					{title:'爱奇艺爱电影：春潮',src:'picture/dy-15.webp',lab:'picture/vip_100000_v_601_0_21.png',remark:'属于我们自己的故事',score:'7.5'},
+				],
+				dy3:['灭绝','无双花木兰','扶桑有狐','无名战士','狐踪谍影','狼鹰','双鱼陨石','龙潭巨兽','复仇者联盟4：终局之战','我们永不言弃',],
+				dsjgd:['内地','自制剧','网络剧','大剧头条','爱青春剧场',],
+				dsj1:[
+					{title:'古董局中局之鉴墨寻瓷',src:'picture/dsj-1.webp',lab:'picture/only.png',score:'8.2'},
+					{title:'彼岸花',src:'picture/dsj-2.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'7.3'},
+					{title:'成化十四年',src:'picture/dsj-3.webp',lab:'picture/only.png',score:'7.2'},
+					{title:'鬓边不是海棠红',src:'picture/dsj-4.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'8.2'},
+					{title:'民国奇探',src:'picture/dsj-5.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'8.4'},
+					{title:'我是余欢水',src:'picture/dsj-6.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'8.2'},
+					{title:'你在我的右手边第一季',src:'picture/dsj-7.webp',lab:'picture/only.png',score:'7.1'},
+				],
+				dsj2:[
+					{title:'天醒之路',src:'picture/dsj-8.webp',lab:'picture/only.png',score:'7.8'},
+					{title:'秋蝉',src:'picture/dsj-9.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'7.9'},
+					{title:'爱情的开关',src:'picture/dsj-10.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'7.5'},
+					{title:'遍地书香',src:'picture/dsj-11.webp',lab:'picture/only.png',score:'6.4'},
+					{title:'猎狐',src:'picture/dsj-12.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'7.9'},
+					{title:'报告王爷，王妃是只猫',src:'picture/dsj-13.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'7.5'},
+					{title:'侦探K9',src:'picture/dsj-14.webp',lab:'picture/only.png',score:'6.9'},
+					{title:'神剧亮了：林允专访',src:'picture/dsj-15.webp',lab:'picture/vip_100000_v_601_0_21.png',score:'7.5'},
+				],
+				dsj3:['秋蝉','天醒之路','古董局中局之鉴墨寻瓷','猎狐','鬓边不是海棠红','彼岸花','民国奇探','爱情的开关','我是余欢水','成化十四年',],
+				relatedwebs:[
+					{title:'公益平台',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat 0 0;background-size: 580px 70px;'},
+					{title:'爱奇艺号',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat -70px 0;background-size: 580px 70px;'},
+					{title:'广告频道',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat -140px 0;background-size: 580px 70px;'},
+					{title:'爱奇艺游戏',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat -210px 0;background-size: 580px 70px;'},
+					{title:'爱奇艺应用商店',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat -280px 0;background-size: 580px 70px;'},
+					{title:'爱奇艺商城',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat -350px 0;background-size: 580px 70px;'},
+					{title:'爱奇艺出品',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat -420px 0;background-size: 580px 70px;'},
+					{title:'游戏直播',b:'background:url(picture/sprite-ptEntry-icons@2x.png) no-repeat -490px 0;background-size: 580px 70px;'},
+				],
+			},
+			methods:{
+				nextPage(){
+					this.jrjdLeft-=1715;
+					this.jrjdPage+=1;
+					if (this.jrjdLeft==-5145) {
+						this.jrjdLeft=0;
+					}
+					if (this.jrjdPage==4) {
+						this.jrjdPage=1;
+					}
+				},
+				previousPage(){
+					this.jrjdLeft+=1715;
+					this.jrjdPage-=1;
+					if (this.jrjdLeft==1715) {
+						this.jrjdLeft=-3430;
+					}
+					if (this.jrjdPage==0) {
+						this.jrjdPage=3;
+					}
+				},
+				nextPage2(){
+					this.zyttLeft-=425;
+					if (this.zyttLeft==-1275) {
+						this.zyttLeft=0;
+					}
+				},
+				previousPage2(){
+					this.zyttLeft+=425;
+					if (this.zyttLeft==425) {
+						this.zyttLeft=-850;
+					}
+				},
+				autoplay(){
+					this.time=setInterval(this.nextPage2,3500);
+				},
+				stop(){
+					clearInterval(this.time);
+				},
+			},
+			created(){
+				this.autoplay();
+			}
+		})
+		//尾部
+		new Vue({
+			el:'.foot',
+			data:{
+				gywm:['公司介绍','新闻动态','联系方式','用户协议','隐私政策',],
+				ab:['Investor Relations','Media Center',],
+				nrhz:['爱奇艺号','爱奇艺内容合作方式','互动视频标准','爱奇艺会员合作',],
+				jshz:['安全应急响应中心','技术故障反馈',],
+				zpyc:['社会招聘','校园招聘',],
+				cjwt:['帮助中心','侵权举报与投诉',],
+				law1:[
+					{title:'营业执照',src:''},
+					{title:'京网文[2018]6272-484号',src:''},
+					{title:'中国互联网诚信联盟',src:'picture/231a8a3be07646768f3cdc04ccff83c2.png'},
+					{title:'出版物经营许可证',src:''},
+					{title:'信息网络传播视听节目许可证 0110544号',src:''},
+					{title:'广播电视节目制作经营许可证 (京)字第1938号',src:''},
+					{title:'京ICP备11032965号',src:''},
+					{title:'经营性网站备案信息',src:'picture/2ccb3bc352c4411fa6098ab02fa8ac71.png'},
+				],
+				law2:['京公网安备 11010802020024号','增值电信业务经营许可证 B2-20120273','互联网药品信息服务资格证书','食品经营许可证 JY11108111598788',],
+				jb:['中国互联网举报中心','网络举报APP下载','反盗版和反盗链权利声明','违法和不良信息举报电话：400-923-7171','举报邮箱：jubao365@qiyi.com',]
+			}
+		})
+	</script>
+</body>
+</html>
